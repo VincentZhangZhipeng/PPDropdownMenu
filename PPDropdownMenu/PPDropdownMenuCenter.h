@@ -18,7 +18,14 @@
 
 @end
 
-@interface PPDropdownMenuCenter : NSObject<DropdownContentTableDelegate>
+@interface PPDropdownMenuCenter : NSObject<DropdownContentTableDelegate>{
+    PPDropdownButton* dropdownButton;
+    DropdownContentTable* contentTable;
+    ContentTable* contentTableDelegate;
+    UIView* blockView;
+    BOOL showContentTableView;
+    CGRect contentFrame;
+}
 @property (assign, nonatomic) id<DropdownButtonDelegate> dropDownButtonDelegate;
 @property (strong, nonatomic) PPDropdownButton* dropdownButton;
 @property (strong, nonatomic) DropdownContentTable* contentTable;
@@ -27,7 +34,8 @@
 @property (nonatomic, assign) BOOL showContentTableView;
 @property (nonatomic, assign) CGRect contentFrame;
 
-- (void)setUpWithMainViewController:(UIViewController*) mainViewController DropdownButtonFrame:(CGRect)buttonFrame ContentTableView:(CGRect)contentFrame andContentTableNameList: (NSArray*)contentTableNameList;
++ (id)SharedPPDropdownMenuCenter;
+- (void)setUpWithMainViewController:(UIViewController*) mainViewController DropdownButtonFrame:(CGRect)buttonFrame ContentTableView:(CGRect)contentTableFrame andContentTableNameList: (NSArray*)contentTableNameList;
 
 - (void)setDropdownButtonTitle:(NSString*)title;
 
