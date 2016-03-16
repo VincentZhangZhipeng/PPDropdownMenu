@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "a81a91c3-a3de-46ec-a43d-9c7f329cb715++6076",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "a81a91c3-a3de-46ec-a43d-9c7f329cb715++6076" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "a81a91c3-a3de-46ec-a43d-9c7f329cb715++6076" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C1BF3CD4-D5E0-43C9-9AE2-8887376DF034",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "a81a91c3-a3de-46ec-a43d-9c7f329cb715++6076" : "Vincent\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "PPDropDownMenu",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "PPDropDownMenu\/PPDropDownMenu.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/svn.motherapp.com",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "a81a91c3-a3de-46ec-a43d-9c7f329cb715++6076"
+    }
+  ]
+}
