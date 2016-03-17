@@ -12,7 +12,7 @@
 @interface ViewController ()< UITableViewDelegate, UITableViewDelegate, DropdownButtonDelegate>
 @property (strong, nonatomic)NSMutableArray* dropdownIndexShowList;
 @property (strong, nonatomic)ContentTable* contentTableDelegate;
-//@property (strong, nonatomic)PPDropdownMenuCenter* dropdownMenuCenter;
+@property (strong, nonatomic)PPDropdownMenuCenter* dropdownMenuCenter;
 @end
 
 @implementation ViewController
@@ -26,8 +26,9 @@
         [self.dropdownIndexShowList addObject: [NSString stringWithFormat:@"%d",i ]];
     }
     
-    [[PPDropdownMenuCenter SharedPPDropdownMenuCenter] setUpWithMainViewController:self DropdownButtonFrame:CGRectMake (0, 30, self.view.frame.size.width, 30) ContentTableView:CGRectMake(0, 60, self.view.frame.size.width, 178) andContentTableNameList:@[@"click1", @"click2", @"click3", @"click4", @"click5"]];
-    [[PPDropdownMenuCenter SharedPPDropdownMenuCenter] setDropdownButtonTitle:@"Filter"];
+    self.dropdownMenuCenter = [[PPDropdownMenuCenter alloc] init];
+    [self.dropdownMenuCenter setUpWithMainViewController:self DropdownButtonFrame:CGRectMake (0, 30, self.view.frame.size.width, 30) ContentTableView:CGRectMake(0, 60, self.view.frame.size.width, 178) andContentTableNameList:@[@"click1", @"click2", @"click3", @"click4", @"click5"]];
+    [self.dropdownMenuCenter setDropdownButtonTitle:@"Filter"];
 }
 
 - (void)dropdownButtonDidClick:(UIButton *)button{

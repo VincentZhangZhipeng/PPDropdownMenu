@@ -9,35 +9,25 @@
 #import "PPDropdownMenuCenter.h"
 
 @implementation PPDropdownMenuCenter
-@synthesize dropdownButton, contentTable, contentTableDelegate, blockView,showContentTableView, contentFrame;
 
-+(id)SharedPPDropdownMenuCenter{
-    static PPDropdownMenuCenter *SharedPPDropdownMenuCenter = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        SharedPPDropdownMenuCenter = [[self alloc] init];
-    });
-    return SharedPPDropdownMenuCenter;
-}
-
--(void)setUpWithDropdownButtonFrame:(CGRect)buttonFrame ContentTableView:(CGRect)contentTableFrame{
-    dropdownButton = [[PPDropdownButton alloc] initWithFrame:buttonFrame];
-    contentTable = [[DropdownContentTable alloc] initWithFrame:contentTableFrame];
-    contentFrame = contentTableFrame;
+-(void)setUpWithDropdownButtonFrame:(CGRect)buttonFrame ContentTableView:(CGRect)contentFrame{
+    self.dropdownButton = [[PPDropdownButton alloc] initWithFrame:buttonFrame];
+    self.contentTable = [[DropdownContentTable alloc] initWithFrame:contentFrame];
+    self.contentFrame = contentFrame;
    
-    [dropdownButton addTarget:self
+    [self.dropdownButton addTarget:self
              action:@selector(dropdownButtonClicked) forControlEvents:UIControlEventTouchUpInside];
 
 
 }
 
-- (void)setUpWithMainViewController:(UIViewController*) mainViewController DropdownButtonFrame:(CGRect)buttonFrame ContentTableView:(CGRect)contentTableFrame andContentTableNameList: (NSArray*)contentTableNameList{
+- (void)setUpWithMainViewController:(UIViewController*) mainViewController DropdownButtonFrame:(CGRect)buttonFrame ContentTableView:(CGRect)contentFrame andContentTableNameList: (NSArray*)contentTableNameList{
     
-    [self setUpWithDropdownButtonFrame:buttonFrame ContentTableView:contentTableFrame];
+    [self setUpWithDropdownButtonFrame:buttonFrame ContentTableView:contentFrame];
     
-    contentTableDelegate = [[ContentTable alloc] init];
-    contentTableDelegate.delegate = self;
-    contentTableDelegate.dropdownContentList = contentTableNameList;
+    self.contentTableDelegate = [[ContentTable alloc] init];
+    self.contentTableDelegate.delegate = self;
+    self.contentTableDelegate.dropdownContentList = contentTableNameList;
     NSMutableArray* selectedList = [NSMutableArray array];
     for(NSInteger i = 0; i< [contentTableNameList count]; i++){
         [selectedList addObject:[NSNumber numberWithBool:NO]];
@@ -45,44 +35,44 @@
     }
     [selectedList replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
     
-    contentTableDelegate.cellSelectedList = selectedList;
+    self.contentTableDelegate.cellSelectedList = selectedList;
     
-    [contentTable setDelegate:contentTableDelegate];
-    [contentTable setDataSource:contentTableDelegate];
-    contentTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.contentTable setDelegate:self.contentTableDelegate];
+    [self.contentTable setDataSource:self.contentTableDelegate];
+    self.contentTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    dropdownButton.backgroundColor = [UIColor orangeColor];
-    _dropDownButtonDelegate = mainViewController;
-    [mainViewController.view addSubview:dropdownButton];
-    [mainViewController.view addSubview:contentTable];
-    [mainViewController.view bringSubviewToFront:contentTable];
+    self.dropdownButton.backgroundColor = [UIColor orangeColor];
+    self.dropDownButtonDelegate = mainViewController;
+    [mainViewController.view addSubview:self.dropdownButton];
+    [mainViewController.view addSubview:self.contentTable];
+    [mainViewController.view bringSubviewToFront:self.contentTable];
     
-    CGFloat blockViewY = contentTable.frame.origin.y + contentTable.frame.size.height;
-    blockView = [[UIView alloc] initWithFrame: CGRectMake(0, blockViewY, mainViewController.view.frame.size.width, mainViewController.view.frame.size.height - blockViewY)];
-    blockView.hidden = YES;
-    blockView.backgroundColor = [UIColor clearColor];
+    CGFloat blockViewY = self.contentTable.frame.origin.y + self.contentTable.frame.size.height;
+    self.blockView = [[UIView alloc] initWithFrame: CGRectMake(0, blockViewY, mainViewController.view.frame.size.width, mainViewController.view.frame.size.height - blockViewY)];
+    self.blockView.hidden = YES;
+    self.blockView.backgroundColor = [UIColor clearColor];
     
     UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideBlockView)];
     
-    [blockView addGestureRecognizer:singleFingerTap];
-    [mainViewController.view addSubview:blockView];
-    [mainViewController.view bringSubviewToFront:blockView];
+    [self.blockView addGestureRecognizer:singleFingerTap];
+    [mainViewController.view addSubview:self.blockView];
+    [mainViewController.view bringSubviewToFront:self.blockView];
     
-    contentTable.frame = CGRectMake(contentTable.frame.origin.x, contentTable.frame.origin.y, contentTable.frame.size.width, 0);
+    self.contentTable.frame = CGRectMake(self.contentTable.frame.origin.x, self.contentTable.frame.origin.y, self.contentTable.frame.size.width, 0);
     
     
 }
 
 - (void)setDropdownButtonTitle:(NSString*)title{
-    [dropdownButton setTitle:title forState:UIControlStateNormal];
+    [self.dropdownButton setTitle:title forState:UIControlStateNormal];
 }
 
 - (void)dropdownButtonClicked{
-    showContentTableView = !showContentTableView;
-    dropdownButton.selected = showContentTableView;
-    if (showContentTableView) {
+    self.showContentTableView = !self.showContentTableView;
+    self.dropdownButton.selected = self.showContentTableView;
+    if (self.showContentTableView) {
         [self showAnimation];
-        [contentTable reloadData];
+        [self.contentTable reloadData];
         
     }else{
         [self hideAnimation];
@@ -90,23 +80,23 @@
         
     }
     
-    [_dropDownButtonDelegate dropdownButtonDidClick:dropdownButton];
-    blockView.hidden = NO;
+    [self.dropDownButtonDelegate dropdownButtonDidClick:self.dropdownButton];
+    self.blockView.hidden = NO;
     
 }
 - (void)contentTabledidSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    blockView.hidden = YES;
-    showContentTableView = NO;
-    dropdownButton.selected = NO;
+    self.blockView.hidden = YES;
+    self.showContentTableView = NO;
+    self.dropdownButton.selected = NO;
     [self hideAnimation];
-    [_dropDownButtonDelegate dropdownContentTableDidSelected:indexPath];
+    [self.dropDownButtonDelegate dropdownContentTableDidSelected:indexPath];
     
 }
 
 - (void)hideBlockView{
-    blockView.hidden = YES;
-    showContentTableView = NO;
-    dropdownButton.selected = NO;
+    self.blockView.hidden = YES;
+    self.showContentTableView = NO;
+    self.dropdownButton.selected = NO;
     [self hideAnimation];
 }
 
@@ -115,7 +105,7 @@
                           delay:0.0
                         options:UIViewAnimationOptionCurveLinear
                      animations:^(void) {
-                         contentTable.frame = CGRectMake(contentTable.frame.origin.x, contentTable.frame.origin.y, contentTable.frame.size.width, 0);
+                         self.contentTable.frame = CGRectMake(self.contentTable.frame.origin.x, self.contentTable.frame.origin.y, self.contentTable.frame.size.width, 0);
 
                      }
                      completion:NULL];
@@ -127,7 +117,7 @@
                           delay:0.0
                         options:UIViewAnimationOptionTransitionCurlDown
                      animations:^(void) {
-                         contentTable.frame = contentFrame;
+                         self.contentTable.frame = self.contentFrame;
                      }
                      completion:NULL];
 
