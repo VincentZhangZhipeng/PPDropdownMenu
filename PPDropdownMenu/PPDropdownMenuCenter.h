@@ -29,6 +29,9 @@
 
 - (void)setUpWithMainViewController:(UIViewController*) mainViewController DropdownButtonFrame:(CGRect)buttonFrame ContentTableView:(CGRect)contentFrame andContentTableNameList: (NSArray*)contentTableNameList;
 
+- (void)setUpWithMainViewController:(UIViewController*) mainViewController DropdownButtonFrame:(CGRect)buttonFrame ContentTableView:(CGRect)contentFrame andContentTableNameDict: (NSMutableDictionary*)contentTableDict;
+
 - (void)setDropdownButtonTitle:(NSString*)title;
+- (void)setDropdownButtonBackgroundColor:(UIColor*)color;
 
 @end

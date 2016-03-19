@@ -13,14 +13,31 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
+    if (self.dropdownContentList) {
+        return 1;
+    
+    }else if(self.dropdownContentDict){
+        return [self.dropdownContentDict count];
+    
+    }
+        
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.dropdownContentList count];
+    if (self.dropdownContentList) {
+        return [self.dropdownContentList count];
+    
+    }else if(self.dropdownContentDict){
+        return [[self.dropdownContentDict objectForKey:[NSNumber numberWithInteger:section]] count];
+    
+    }
+    
+    return 0;
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -31,9 +48,21 @@
     
     }
     // Configure the cell...
-    cell.buttonNameLabel.text = [self.dropdownContentList objectAtIndex:indexPath.row];
-    BOOL isCellSelected = [[self.cellSelectedList objectAtIndex: indexPath.row] boolValue];
-    cell.selectIndicator.hidden = !isCellSelected;
+    if (self.dropdownContentDict) {
+        NSArray* dropdownContentList = [self.dropdownContentDict objectForKey:[NSNumber numberWithInteger:indexPath.section]];
+        cell.buttonNameLabel.text = [dropdownContentList objectAtIndex:indexPath.row];
+        
+        NSArray* cellSelectedList = [self.cellSelectedDict objectForKey:[NSNumber numberWithInteger:indexPath.section]];
+        BOOL isCellSelected = [[cellSelectedList objectAtIndex: indexPath.row] boolValue];
+        cell.selectIndicator.hidden = !isCellSelected;
+        
+    }else if(self.dropdownContentList){
+        cell.buttonNameLabel.text = [self.dropdownContentList objectAtIndex:indexPath.row];
+        BOOL isCellSelected = [[self.cellSelectedList objectAtIndex: indexPath.row] boolValue];
+        cell.selectIndicator.hidden = !isCellSelected;
+    
+    }
+    
     return cell;
 }
 
@@ -41,23 +70,36 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    for(NSIndexPath*index in tableView.indexPathsForVisibleRows){
-        DropdownContentTableViewCell* cell = [tableView cellForRowAtIndexPath:index];
-        cell.selectIndicator.hidden = YES;
-
-}
-    if (!self.canDuplicateSelect) {
-        for(NSInteger index = 0; index < [self.cellSelectedList count]; index++){
-            [self.cellSelectedList replaceObjectAtIndex:index withObject:[NSNumber numberWithBool:NO]];
-        
+    
+    if (self.dropdownContentDict) {
+        for (NSString* key in self.dropdownContentDict) {
+            NSMutableArray* selectedList = [self.dropdownContentDict objectForKey:key];
+            [selectedList replaceObjectsAtIndexes:[NSIndexSet indexSetWithIndex: [selectedList count]] withObjects:[NSMutableArray arrayWithObject [NSNumber numberWithBool:NO]];
         }
         
+    
+    }else if(self.dropdownContentList){
+        for(NSIndexPath*index in tableView.indexPathsForVisibleRows){
+            DropdownContentTableViewCell* cell = [tableView cellForRowAtIndexPath:index];
+            cell.selectIndicator.hidden = YES;
+            
+        }
+        if (!self.canDuplicateSelect) {
+            for(NSInteger index = 0; index < [self.cellSelectedList count]; index++){
+                [self.cellSelectedList replaceObjectAtIndex:index withObject:[NSNumber numberWithBool:NO]];
+                
+            }
+            
+        }
+        
+        DropdownContentTableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+        cell.selectIndicator.hidden = NO;
+        
+        [self.cellSelectedList replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:YES]];
+
+    
     }
     
-    DropdownContentTableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.selectIndicator.hidden = NO;
-    
-     [self.cellSelectedList replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:YES]];
     
     
     [self.delegate contentTabledidSelectRowAtIndexPath:indexPath];

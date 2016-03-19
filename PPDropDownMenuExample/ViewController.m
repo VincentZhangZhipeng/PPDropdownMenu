@@ -13,6 +13,7 @@
 @property (strong, nonatomic)NSMutableArray* dropdownIndexShowList;
 @property (strong, nonatomic)ContentTable* contentTableDelegate;
 @property (strong, nonatomic)PPDropdownMenuCenter* dropdownMenuCenter;
+@property (strong, nonatomic)PPDropdownMenuCenter* rightDropDownCenter;
 @end
 
 @implementation ViewController
@@ -27,8 +28,14 @@
     }
     
     self.dropdownMenuCenter = [[PPDropdownMenuCenter alloc] init];
-    [self.dropdownMenuCenter setUpWithMainViewController:self DropdownButtonFrame:CGRectMake (0, 30, self.view.frame.size.width, 30) ContentTableView:CGRectMake(0, 60, self.view.frame.size.width, 178) andContentTableNameList:@[@"click1", @"click2", @"click3", @"click4", @"click5"]];
+    [self.dropdownMenuCenter setUpWithMainViewController:self DropdownButtonFrame:CGRectMake (0, 30, self.view.frame.size.width/2, 30) ContentTableView:CGRectMake(0, 60, self.view.frame.size.width, 178) andContentTableNameList:@[@"click1", @"click2", @"click3", @"click4", @"click5"]];
     [self.dropdownMenuCenter setDropdownButtonTitle:@"Filter"];
+    
+    self.rightDropDownCenter = [[PPDropdownMenuCenter alloc]init];
+    NSMutableDictionary* selectedDict = [NSMutableDictionary dictionaryWithDictionary:@{[NSNumber numberWithInteger:0]:@[@"click1", @"click2", @"click3"], [NSNumber numberWithInteger:1]:@[@"click4", @"click5", @"click6"]}];
+    [self.rightDropDownCenter setUpWithMainViewController:self DropdownButtonFrame:CGRectMake (self.view.frame.size.width/2, 30, self.view.frame.size.width/2, 30) ContentTableView:CGRectMake(0, 60, self.view.frame.size.width, 178) andContentTableNameDict:selectedDict];
+    [self.rightDropDownCenter setDropdownButtonTitle:@"Sort"];
+    
 }
 
 - (void)dropdownButtonDidClick:(UIButton *)button{

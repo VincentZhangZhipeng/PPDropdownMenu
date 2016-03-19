@@ -1,21 +1,28 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "a81a91c3-a3de-46ec-a43d-9c7f329cb715++6076",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "F4EA59C4C6E9C5058ADCAC82A213F5EC1EEB6595",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
     "a81a91c3-a3de-46ec-a43d-9c7f329cb715++6076" : {
 
     }
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F4EA59C4C6E9C5058ADCAC82A213F5EC1EEB6595" : 0,
     "a81a91c3-a3de-46ec-a43d-9c7f329cb715++6076" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C1BF3CD4-D5E0-43C9-9AE2-8887376DF034",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "a81a91c3-a3de-46ec-a43d-9c7f329cb715++6076" : "Vincent\/"
+    "F4EA59C4C6E9C5058ADCAC82A213F5EC1EEB6595" : "PPDropdownMenu\/",
+    "a81a91c3-a3de-46ec-a43d-9c7f329cb715++6076" : ""
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "PPDropDownMenu",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
-  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "PPDropDownMenu\/PPDropDownMenu.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "PPDropDownMenu.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/VincentZhangZhipeng\/PPDropdownMenu.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F4EA59C4C6E9C5058ADCAC82A213F5EC1EEB6595"
+    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/svn.motherapp.com",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",

@@ -63,8 +63,66 @@
     
 }
 
+- (void)setUpWithMainViewController:(UIViewController*) mainViewController DropdownButtonFrame:(CGRect)buttonFrame ContentTableView:(CGRect)contentFrame andContentTableNameDict: (NSMutableDictionary*)contentTableDict{
+    [self setUpWithDropdownButtonFrame:buttonFrame ContentTableView:contentFrame];
+    
+    self.contentTableDelegate = [[ContentTable alloc] init];
+    self.contentTableDelegate.delegate = self;
+    self.contentTableDelegate.dropdownContentDict = contentTableDict;
+    
+    NSMutableDictionary* selectedDict = [[NSMutableDictionary alloc]init];
+    NSInteger count = 0;
+    for(NSString* key in contentTableDict){
+        NSMutableArray* selectedList = [[NSMutableArray alloc] init];
+        for(NSInteger i = 0; i<  [[contentTableDict objectForKey:key] count]; i++){
+            [selectedList addObject: [NSNumber numberWithBool:NO]];
+            
+        }
+
+
+        [selectedDict setObject:selectedList forKey:[NSNumber numberWithInteger:count]];
+        count ++;
+
+    }
+    
+    NSMutableArray* selectedList = [selectedDict objectForKey: [NSNumber numberWithInt:0]];
+    [selectedList replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
+    
+    self.contentTableDelegate.cellSelectedDict = selectedDict;
+    
+    [self.contentTable setDelegate:self.contentTableDelegate];
+    [self.contentTable setDataSource:self.contentTableDelegate];
+    self.contentTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    self.dropdownButton.backgroundColor = [UIColor orangeColor];
+    self.dropDownButtonDelegate = mainViewController;
+    [mainViewController.view addSubview:self.dropdownButton];
+    [mainViewController.view addSubview:self.contentTable];
+    [mainViewController.view bringSubviewToFront:self.contentTable];
+    
+    CGFloat blockViewY = self.contentTable.frame.origin.y + self.contentTable.frame.size.height;
+    self.blockView = [[UIView alloc] initWithFrame: CGRectMake(0, blockViewY, mainViewController.view.frame.size.width, mainViewController.view.frame.size.height - blockViewY)];
+    self.blockView.hidden = YES;
+    self.blockView.backgroundColor = [UIColor clearColor];
+    
+    UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideBlockView)];
+    
+    [self.blockView addGestureRecognizer:singleFingerTap];
+    [mainViewController.view addSubview:self.blockView];
+    [mainViewController.view bringSubviewToFront:self.blockView];
+    
+    self.contentTable.frame = CGRectMake(self.contentTable.frame.origin.x, self.contentTable.frame.origin.y, self.contentTable.frame.size.width, 0);
+}
+
+
+
 - (void)setDropdownButtonTitle:(NSString*)title{
     [self.dropdownButton setTitle:title forState:UIControlStateNormal];
+}
+
+- (void)setDropdownButtonBackgroundColor:(UIColor*)color{
+    [self.dropdownButton setBackgroundColor:color];
+
 }
 
 - (void)dropdownButtonClicked{
