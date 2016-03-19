@@ -14,7 +14,7 @@
 
 @protocol DropdownButtonDelegate <NSObject>
 - (void)dropdownButtonDidClick:(UIButton*)button;
-- (void)dropdownContentTableDidSelected:(NSIndexPath*) indexPath;
+- (void)dropdownContentTableDidSelected:(NSIndexPath*) indexPath fromDelegate:(id)delegate;
 
 @end
 
@@ -33,5 +33,6 @@
 
 - (void)setDropdownButtonTitle:(NSString*)title;
 - (void)setDropdownButtonBackgroundColor:(UIColor*)color;
+- (void)setDropdownButtonMutilSelect:(BOOL)canMutilSelected;
 
 @end

@@ -30,6 +30,7 @@
     self.dropdownMenuCenter = [[PPDropdownMenuCenter alloc] init];
     [self.dropdownMenuCenter setUpWithMainViewController:self DropdownButtonFrame:CGRectMake (0, 30, self.view.frame.size.width/2, 30) ContentTableView:CGRectMake(0, 60, self.view.frame.size.width, 178) andContentTableNameList:@[@"click1", @"click2", @"click3", @"click4", @"click5"]];
     [self.dropdownMenuCenter setDropdownButtonTitle:@"Filter"];
+//    [self.dropdownMenuCenter setDropdownButtonMutilSelect:YES];
     
     self.rightDropDownCenter = [[PPDropdownMenuCenter alloc]init];
     NSMutableDictionary* selectedDict = [NSMutableDictionary dictionaryWithDictionary:@{[NSNumber numberWithInteger:0]:@[@"click1", @"click2", @"click3"], [NSNumber numberWithInteger:1]:@[@"click4", @"click5", @"click6"]}];
@@ -69,18 +70,32 @@
     }
     cell.textLabel.text = [self.dropdownIndexShowList objectAtIndex:indexPath.row];
     
+    if (indexPath.row == 0) {
+        cell.backgroundColor = [UIColor redColor];
+    }
+    
     return cell;
 }
 
 #pragma mark - drop down button delegate
-- (void)dropdownContentTableDidSelected:(NSIndexPath *)indexPath{
-    for(NSIndexPath*index in self.tableView.indexPathsForVisibleRows){
-        UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:index];
-        cell.backgroundColor = [UIColor whiteColor];
+- (void)dropdownContentTableDidSelected:(NSIndexPath *)indexPath fromDelegate:(id)delegate{
+    if (delegate == self.dropdownMenuCenter) {
+        if (!self.dropdownMenuCenter.contentTableDelegate.canDuplicateSelect) {
+            for(NSIndexPath*index in self.tableView.indexPathsForVisibleRows){
+                UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:index];
+                cell.backgroundColor = [UIColor whiteColor];
+                
+            }
+        }
+        
+        UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        cell.backgroundColor = [UIColor redColor];
+    
+    }else if(delegate == self.rightDropDownCenter){
+        [[[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat: @"section %lu row %lu did clicked", indexPath.section, indexPath.row] delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil] show];
     
     }
-    UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    cell.backgroundColor = [UIColor redColor];
+    
 }
 
 @end

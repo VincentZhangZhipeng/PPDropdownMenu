@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		852A2EAA1C964CCE003C09BE /* PPDropDownMenuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 852A2EA91C964CCE003C09BE /* PPDropDownMenuTests.m */; };
 		852A2EB51C964CCE003C09BE /* PPDropDownMenuUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 852A2EB41C964CCE003C09BE /* PPDropDownMenuUITests.m */; };
+		85A6E0D31C9D23ED003EB7DB /* Mapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A6E0D21C9D23ED003EB7DB /* Mapping.m */; settings = {ASSET_TAGS = (); }; };
 		85DD229F1C99B8F900A60AD9 /* ContentTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DD22951C99B8F900A60AD9 /* ContentTable.m */; settings = {ASSET_TAGS = (); }; };
 		85DD22A01C99B8F900A60AD9 /* DropdownContentTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DD22971C99B8F900A60AD9 /* DropdownContentTable.m */; settings = {ASSET_TAGS = (); }; };
 		85DD22A11C99B8F900A60AD9 /* DropdownContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 85DD22991C99B8F900A60AD9 /* DropdownContentTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -50,6 +51,8 @@
 		852A2EB01C964CCE003C09BE /* PPDropDownMenuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PPDropDownMenuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		852A2EB41C964CCE003C09BE /* PPDropDownMenuUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PPDropDownMenuUITests.m; sourceTree = "<group>"; };
 		852A2EB61C964CCE003C09BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85A6E0D11C9D23ED003EB7DB /* Mapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mapping.h; sourceTree = "<group>"; };
+		85A6E0D21C9D23ED003EB7DB /* Mapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mapping.m; sourceTree = "<group>"; };
 		85DD22941C99B8F900A60AD9 /* ContentTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentTable.h; sourceTree = "<group>"; };
 		85DD22951C99B8F900A60AD9 /* ContentTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentTable.m; sourceTree = "<group>"; };
 		85DD22961C99B8F900A60AD9 /* DropdownContentTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropdownContentTable.h; sourceTree = "<group>"; };
@@ -152,6 +155,8 @@
 				85DD229D1C99B8F900A60AD9 /* PPDropdownMenuCenter.h */,
 				85DD229E1C99B8F900A60AD9 /* PPDropdownMenuCenter.m */,
 				85DD22B81C99BA1700A60AD9 /* Media.xcassets */,
+				85A6E0D11C9D23ED003EB7DB /* Mapping.h */,
+				85A6E0D21C9D23ED003EB7DB /* Mapping.m */,
 			);
 			path = PPDropdownMenu;
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 				85DD22A41C99B8F900A60AD9 /* PPDropdownMenuCenter.m in Sources */,
 				85DD22A31C99B8F900A60AD9 /* PPDropdownButton.m in Sources */,
 				85DD22B61C99B90600A60AD9 /* main.m in Sources */,
+				85A6E0D31C9D23ED003EB7DB /* Mapping.m in Sources */,
 				85DD22A01C99B8F900A60AD9 /* DropdownContentTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

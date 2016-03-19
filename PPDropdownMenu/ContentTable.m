@@ -72,19 +72,40 @@
 {
     
     if (self.dropdownContentDict) {
-        for (NSString* key in self.dropdownContentDict) {
-            NSMutableArray* selectedList = [self.dropdownContentDict objectForKey:key];
-            [selectedList replaceObjectsAtIndexes:[NSIndexSet indexSetWithIndex: [selectedList count]] withObjects:[NSMutableArray arrayWithObject [NSNumber numberWithBool:NO]];
+        if (!self.canDuplicateSelect) {
+            for (NSString* key in self.cellSelectedDict) {
+                NSMutableArray* cellSelectedList = [self.cellSelectedDict objectForKey:key];
+                
+                for(NSInteger index = 0; index < [cellSelectedList count]; index++){
+                    [cellSelectedList replaceObjectAtIndex:index withObject:[NSNumber numberWithBool:NO]];
+                }
+                
+            }
+            
+            for(NSIndexPath*index in tableView.indexPathsForVisibleRows){
+                DropdownContentTableViewCell* cell = [tableView cellForRowAtIndexPath:index];
+                cell.selectIndicator.hidden = YES;
+                
+            }
         }
+
+        
+        DropdownContentTableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+        cell.selectIndicator.hidden = NO;
+        
+        NSMutableArray* cellSelectedList = [self.cellSelectedDict objectForKey:[NSNumber numberWithInteger:indexPath.section]];
+        [cellSelectedList replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:YES]];
         
     
     }else if(self.dropdownContentList){
-        for(NSIndexPath*index in tableView.indexPathsForVisibleRows){
-            DropdownContentTableViewCell* cell = [tableView cellForRowAtIndexPath:index];
-            cell.selectIndicator.hidden = YES;
-            
-        }
+        
         if (!self.canDuplicateSelect) {
+            for(NSIndexPath*index in tableView.indexPathsForVisibleRows){
+                DropdownContentTableViewCell* cell = [tableView cellForRowAtIndexPath:index];
+                cell.selectIndicator.hidden = YES;
+                
+            }
+            
             for(NSInteger index = 0; index < [self.cellSelectedList count]; index++){
                 [self.cellSelectedList replaceObjectAtIndex:index withObject:[NSNumber numberWithBool:NO]];
                 
@@ -102,7 +123,7 @@
     
     
     
-    [self.delegate contentTabledidSelectRowAtIndexPath:indexPath];
+    [self.delegate contentTabledidSelectRowAtIndexPath:indexPath fromDelegate:self.delegate];
     
 //    tableView.hidden = YES;
 }

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 @protocol DropdownContentTableDelegate <NSObject>
-- (void) contentTabledidSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)contentTabledidSelectRowAtIndexPath:(NSIndexPath *)indexPath fromDelegate:(id)delegate;
 
 @end
 

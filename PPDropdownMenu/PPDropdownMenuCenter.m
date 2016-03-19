@@ -114,14 +114,17 @@
     self.contentTable.frame = CGRectMake(self.contentTable.frame.origin.x, self.contentTable.frame.origin.y, self.contentTable.frame.size.width, 0);
 }
 
-
-
 - (void)setDropdownButtonTitle:(NSString*)title{
     [self.dropdownButton setTitle:title forState:UIControlStateNormal];
 }
 
 - (void)setDropdownButtonBackgroundColor:(UIColor*)color{
     [self.dropdownButton setBackgroundColor:color];
+
+}
+
+- (void)setDropdownButtonMutilSelect:(BOOL)canMutilSelected{
+    self.contentTableDelegate.canDuplicateSelect = canMutilSelected;
 
 }
 
@@ -142,12 +145,12 @@
     self.blockView.hidden = NO;
     
 }
-- (void)contentTabledidSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)contentTabledidSelectRowAtIndexPath:(NSIndexPath *)indexPath fromDelegate:(id)delegate{
     self.blockView.hidden = YES;
     self.showContentTableView = NO;
     self.dropdownButton.selected = NO;
     [self hideAnimation];
-    [self.dropDownButtonDelegate dropdownContentTableDidSelected:indexPath];
+    [self.dropDownButtonDelegate dropdownContentTableDidSelected:indexPath fromDelegate:delegate];
     
 }
 
